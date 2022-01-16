@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mboa_waste/models/models.dart';
+import 'package:mboa_waste/widgets/widgets.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -13,12 +15,19 @@ class Home extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
                 height: 120.0,
                 child: ListView.builder(
                   itemCount: 10,
                   itemBuilder: (BuildContext context, int index) {
-                    return WasteBox();
+                    return CouncilBox(
+                      council: Council(
+                          name: "Yaounde 1",
+                          image: "council.png",
+                          mayor: "Mme LordBrook",
+                          phone: "690535759",
+                          localisation: "Nglonkak, Valee"),
+                    );
                   },
                 ))
           ],
