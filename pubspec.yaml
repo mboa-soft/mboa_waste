@@ -36,6 +36,7 @@ dependencies:
   fl_chart: ^0.41.0
   flutter:
     sdk: flutter
+  flutterfire_ui: ^0.3.1
   google_fonts: ^2.2.0
   hooks_riverpod: ^1.0.3
   iconsax: ^0.0.8
