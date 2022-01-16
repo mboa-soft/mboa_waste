@@ -34,10 +34,10 @@ class Home extends StatelessWidget {
             const SizedBox(
               height: 20.0,
             ),
-            Expanded(
+            const Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(right: 16.0, left: 6.0),
-                child: _LineChart(isShowingMainData: isShowingMainData),
+                padding: EdgeInsets.only(right: 16.0, left: 6.0),
+                child: _LineChart(isShowingMainData: true),
               ),
             ),
           ],
