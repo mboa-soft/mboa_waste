@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mboa_waste/config/palette.dart';
+import 'package:mboa_waste/models/models.dart';
 
 class CouncilBox extends StatelessWidget {
   final Council council;
@@ -6,6 +8,14 @@ class CouncilBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24.0),
+      ),
+      child: Container(
+        height: 100.0,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(24.0)),
+      ),
+    );
   }
 }
