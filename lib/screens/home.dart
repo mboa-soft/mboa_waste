@@ -10,6 +10,20 @@ class Home extends StatelessWidget {
         title: const Text("Mboawaste"),
         centerTitle: true,
       ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+                height: 120.0,
+                child: ListView.builder(
+                  itemCount: 10,
+                  itemBuilder: (BuildContext context, int index) {
+                    return WasteBox();
+                  },
+                ))
+          ],
+        ),
+      ),
     );
   }
 }
