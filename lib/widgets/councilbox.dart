@@ -12,27 +12,32 @@ class CouncilBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Palette.primary,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(24.0),
-      ),
-      child: Container(
-        height: 100.0,
-        width: 200.0,
-        decoration: BoxDecoration(
-          color: Palette.ligth,
-          borderRadius:
-              const BorderRadius.only(topRight: Radius.elliptical(380, 50)),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, '/council', arguments: council);
+      },
+      child: Card(
+        color: Palette.primary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24.0),
         ),
-        child: Stack(
-          children: [
-            const Align(
-              alignment: Alignment.topRight,
-              child: Icon(Iconsax.activity),
-            ),
-            Text(council.name, style: Styles.header),
-          ],
+        child: Container(
+          height: 100.0,
+          width: 200.0,
+          decoration: BoxDecoration(
+            color: Palette.ligth,
+            borderRadius:
+                const BorderRadius.only(topRight: Radius.elliptical(380, 50)),
+          ),
+          child: Stack(
+            children: [
+              const Align(
+                alignment: Alignment.topRight,
+                child: Icon(Iconsax.activity),
+              ),
+              Text(council.name, style: Styles.header),
+            ],
+          ),
         ),
       ),
     );
