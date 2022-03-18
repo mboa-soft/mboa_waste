@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mboa_waste/domain/auth/auth_provider.dart';
@@ -23,6 +24,8 @@ class MboaWaste extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: "Mboa Waste",
+        restorationScopeId: 'mboawaste',
+        builder: EasyLoading.init(),
         theme: ThemeData(
           primarySwatch: Colors.green,
           textTheme: GoogleFonts.latoTextTheme(
@@ -33,7 +36,11 @@ class MboaWaste extends StatelessWidget {
           create: (context) => AuthBloc(provider: AuthProvider()),
           child: BlocConsumer<AuthBloc, AuthState>(
             listener: (context, state) {
-              // TODO: implement listener
+              if (state.loading) {
+                EasyLoading.show(status: 'loading...Please wait');
+              } else {
+                EasyLoading.dismiss();
+              }
             },
             builder: (context, state) {
               if (state is LoggedIn) {
@@ -41,7 +48,11 @@ class MboaWaste extends StatelessWidget {
               } else if (state is LoggedOut) {
                 return const Login();
               } else {
-                return Container();
+                return const Scaffold(
+                  body: Center(
+                    child: Text('Something went wrong'),
+                  ),
+                );
               }
             },
           ),
