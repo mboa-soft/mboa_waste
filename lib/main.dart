@@ -11,6 +11,7 @@ import 'domain/auth/bloc/auth_bloc.dart';
 import 'screens/screens.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
