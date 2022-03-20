@@ -1,11 +1,51 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:mboa_waste/config/palette.dart';
 import 'package:mboa_waste/config/styles.dart';
+import 'package:mboa_waste/screens/screens.dart';
 import 'package:mboa_waste/widgets/widgets.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(14.0),
+      child: PersistentTabView(
+        context,
+        screens: _buildScreens(),
+        items: _navBarsItems(),
+        confineInSafeArea: true,
+        backgroundColor: CupertinoColors.activeGreen,
+        handleAndroidBackButtonPress: true,
+        resizeToAvoidBottomInset: true,
+        hideNavigationBarWhenKeyboardShows: true,
+        decoration: NavBarDecoration(
+          borderRadius: BorderRadius.circular(26.0),
+          colorBehindNavBar: Colors.white,
+        ),
+        popAllScreensOnTapOfSelectedTab: true,
+        popActionScreens: PopActionScreensType.all,
+        itemAnimationProperties: const ItemAnimationProperties(
+          duration: Duration(milliseconds: 200),
+          curve: Curves.ease,
+        ),
+        screenTransitionAnimation: const ScreenTransitionAnimation(
+          animateTabTransition: true,
+          curve: Curves.ease,
+          duration: Duration(milliseconds: 200),
+        ),
+        navBarStyle: NavBarStyle.style1,
+      ),
+    );
+  }
+}
+
+class Main extends StatelessWidget {
+  const Main({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -96,4 +136,42 @@ class Home extends StatelessWidget {
       ),
     );
   }
+}
+
+List<Widget> _buildScreens() {
+  return [
+    const Main(),
+    const Main(),
+    const MapView(),
+    const Main(),
+  ];
+}
+
+List<PersistentBottomNavBarItem> _navBarsItems() {
+  return [
+    PersistentBottomNavBarItem(
+      icon: const Icon(CupertinoIcons.home),
+      title: ("Home"),
+      activeColorPrimary: CupertinoColors.white,
+      inactiveColorPrimary: Colors.white70,
+    ),
+    PersistentBottomNavBarItem(
+      icon: const Icon(CupertinoIcons.compass),
+      title: ("Locations"),
+      activeColorPrimary: CupertinoColors.white,
+      inactiveColorPrimary: Colors.white70,
+    ),
+    PersistentBottomNavBarItem(
+      icon: const Icon(LineIcons.mapMarker),
+      title: ("Mboabins"),
+      activeColorPrimary: CupertinoColors.white,
+      inactiveColorPrimary: Colors.white70,
+    ),
+    PersistentBottomNavBarItem(
+      icon: const Icon(CupertinoIcons.profile_circled),
+      title: ("Profile"),
+      activeColorPrimary: CupertinoColors.white,
+      inactiveColorPrimary: Colors.white70,
+    ),
+  ];
 }
