@@ -14,7 +14,7 @@ class CouncilBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/council', arguments: council as Council);
+        Navigator.pushNamed(context, '/council', arguments: council);
       },
       child: Card(
         color: Palette.primary,
