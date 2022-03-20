@@ -30,7 +30,7 @@ class MboaWaste extends StatelessWidget {
         builder: EasyLoading.init(),
         theme: ThemeData(
           primarySwatch: Colors.green,
-          textTheme: GoogleFonts.latoTextTheme(
+          textTheme: GoogleFonts.rajdhaniTextTheme(
             Theme.of(context).textTheme,
           ),
         ),
