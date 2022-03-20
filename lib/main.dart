@@ -25,6 +25,7 @@ class MboaWaste extends StatelessWidget {
     return MaterialApp(
         title: "Mboa Waste",
         restorationScopeId: 'mboawaste',
+        debugShowCheckedModeBanner: false,
         builder: EasyLoading.init(),
         theme: ThemeData(
           primarySwatch: Colors.green,
@@ -46,7 +47,7 @@ class MboaWaste extends StatelessWidget {
               if (state is LoggedIn) {
                 return const Home();
               } else if (state is LoggedOut) {
-                return const Login();
+                return const Home();
               } else {
                 return const Scaffold(
                   body: Center(
