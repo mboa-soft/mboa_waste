@@ -58,13 +58,30 @@ class Home extends StatelessWidget {
               ),
               const SizedBox(height: 20.0),
               SizedBox(
-                height: 150.0,
+                height: 70.0,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     return const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: CityBox(),
+                    );
+                  },
+                  itemCount: 10,
+                  shrinkWrap: true,
+                  addAutomaticKeepAlives: true,
+                  physics: const BouncingScrollPhysics(),
+                ),
+              ),
+              const SizedBox(height: 20.0),
+              SizedBox(
+                height: 170.0,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Mboabin(),
                     );
                   },
                   itemCount: 10,
