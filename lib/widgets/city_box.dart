@@ -8,8 +8,8 @@ class CityBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150.0,
-      width: 150.0,
+      height: 60.0,
+      width: 160.0,
       child: Center(
         child: Text(
           "Yaounde",
