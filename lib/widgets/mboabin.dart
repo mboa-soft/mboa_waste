@@ -19,7 +19,7 @@ class Mboabin extends StatelessWidget {
             width: 1.0,
           ),
           image: const DecorationImage(
-            image: AssetImage('assets/images/mboabin.png'),
+            image: AssetImage('assets/images/image.jpg'),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(12.0),
