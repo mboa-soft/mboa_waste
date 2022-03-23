@@ -5,6 +5,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:mboa_waste/config/palette.dart';
 import 'package:mboa_waste/config/styles.dart';
 import 'package:mboa_waste/models/models.dart';
+import 'package:mboa_waste/screens/mboabin_view.dart';
 
 class CouncilBox extends StatelessWidget {
   final Council council;
@@ -14,7 +15,8 @@ class CouncilBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/council', arguments: council);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MboabinView()));
       },
       child: Card(
         color: Palette.primary,
