@@ -8,7 +8,9 @@ class Styles {
     fontWeight: FontWeight.bold,
   );
 
-  static TextStyle designWith(Color color, double size, bool bold) => TextStyle(
+  static TextStyle designWith(
+          {required Color color, required double size, required bool bold}) =>
+      TextStyle(
         color: color,
         fontSize: 16.0,
         fontWeight: bold ? FontWeight.bold : FontWeight.normal,
