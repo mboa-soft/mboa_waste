@@ -12,34 +12,33 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(14.0),
-      child: PersistentTabView(
-        context,
-        screens: _buildScreens(),
-        items: _navBarsItems(),
-        confineInSafeArea: true,
-        backgroundColor: CupertinoColors.activeGreen,
-        handleAndroidBackButtonPress: true,
-        resizeToAvoidBottomInset: true,
-        hideNavigationBarWhenKeyboardShows: true,
-        decoration: NavBarDecoration(
-          borderRadius: BorderRadius.circular(26.0),
-          colorBehindNavBar: Colors.white,
-        ),
-        popAllScreensOnTapOfSelectedTab: true,
-        popActionScreens: PopActionScreensType.all,
-        itemAnimationProperties: const ItemAnimationProperties(
-          duration: Duration(milliseconds: 200),
-          curve: Curves.ease,
-        ),
-        screenTransitionAnimation: const ScreenTransitionAnimation(
-          animateTabTransition: true,
-          curve: Curves.ease,
-          duration: Duration(milliseconds: 200),
-        ),
-        navBarStyle: NavBarStyle.style1,
+    return PersistentTabView(
+      context,
+      screens: _buildScreens(),
+      items: _navBarsItems(),
+      confineInSafeArea: true,
+      hideNavigationBar: false,
+      margin: const EdgeInsets.all(12.0),
+      backgroundColor: CupertinoColors.activeGreen,
+      handleAndroidBackButtonPress: true,
+      resizeToAvoidBottomInset: true,
+      hideNavigationBarWhenKeyboardShows: true,
+      decoration: NavBarDecoration(
+        borderRadius: BorderRadius.circular(26.0),
+        colorBehindNavBar: Colors.white,
       ),
+      popAllScreensOnTapOfSelectedTab: true,
+      popActionScreens: PopActionScreensType.once,
+      itemAnimationProperties: const ItemAnimationProperties(
+        duration: Duration(milliseconds: 200),
+        curve: Curves.ease,
+      ),
+      screenTransitionAnimation: const ScreenTransitionAnimation(
+        animateTabTransition: true,
+        curve: Curves.ease,
+        duration: Duration(milliseconds: 200),
+      ),
+      navBarStyle: NavBarStyle.style1,
     );
   }
 }
@@ -53,7 +52,7 @@ class Main extends StatelessWidget {
       appBar: AppBar(
           title: Text(
             "Mboawaste",
-            style: Styles.designWith(Palette.primary, 18.0, true),
+            style: Styles.designWith(color:Palette.primary, size:18.0, bold: true),
           ),
           centerTitle: true,
           elevation: 0.0,
