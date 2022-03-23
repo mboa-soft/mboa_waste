@@ -52,7 +52,8 @@ class Main extends StatelessWidget {
       appBar: AppBar(
           title: Text(
             "Mboawaste",
-            style: Styles.designWith(color:Palette.primary, size:18.0, bold: true),
+            style: Styles.designWith(
+                color: Palette.primary, size: 18.0, bold: true),
           ),
           centerTitle: true,
           elevation: 0.0,
