@@ -168,7 +168,7 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
       inactiveColorPrimary: Colors.white70,
     ),
     PersistentBottomNavBarItem(
-      icon: const Icon(CupertinoIcons.profile_circled),
+      icon: const Icon(CupertinoIcons.barcode),
       title: ("Profile"),
       activeColorPrimary: CupertinoColors.white,
       inactiveColorPrimary: Colors.white70,
