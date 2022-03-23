@@ -13,7 +13,7 @@ class CityBox extends StatelessWidget {
       child: Center(
         child: Text(
           "Yaounde",
-          style: Styles.designWith(Palette.primary, 20, true),
+          style: Styles.designWith(color: Palette.primary, size: 20, bold: true),
         ),
       ),
       decoration: BoxDecoration(
