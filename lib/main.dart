@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mboa_waste/domain/auth/auth_provider.dart';
 import 'package:mboa_waste/firebase_options.dart';
-import 'package:mboa_waste/screens/mboabin_view.dart';
 
 import 'domain/auth/bloc/auth_bloc.dart';
 import 'screens/screens.dart';
