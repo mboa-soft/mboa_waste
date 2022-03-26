@@ -22,7 +22,7 @@ class MboaWaste extends StatelessWidget {
   const MboaWaste({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  
     return MaterialApp(
         title: "Mboa Waste",
         restorationScopeId: 'mboawaste',
