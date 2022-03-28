@@ -13,7 +13,7 @@ class Mboabin extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const MboabinView()));
+            MaterialPageRoute(builder: (context) =>  MboaBinView()));
       },
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -26,7 +26,7 @@ class Mboabin extends StatelessWidget {
               width: 1.0,
             ),
             image: const DecorationImage(
-              image: AssetImage('assets/images/image.jpg'),
+              image: AssetImage('assets/images/city_bg.jpg'),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(12.0),

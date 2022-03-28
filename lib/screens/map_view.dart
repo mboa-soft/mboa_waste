@@ -146,37 +146,7 @@ class MapViewState extends State<MapView> {
                                     ),
                                   ],
                                 ),
-                                // SfCartesianChart(
-                                //     primaryXAxis:
-                                //         CategoryAxis(name: "Waste Amount"),
-                                //     // Chart title
-                                //     title: ChartTitle(
-                                //         text: 'Waste production analysis'),
-
-                                //     // Enable tooltip
-                                //     tooltipBehavior: TooltipBehavior(
-                                //         enable: true,
-                                //         header: '',
-                                //         canShowMarker: false,
-                                //         format: 'point.x : point.y'),
-                                //     series: <BarSeries<MboaData, String>>[
-                                //       BarSeries<MboaData, String>(
-                                //           dataSource: <MboaData>[
-                                //             MboaData('Jan', 35),
-                                //             MboaData('Feb', 28),
-                                //             MboaData('Mar', 34),
-                                //             MboaData('Apr', 32),
-                                //             MboaData('May', 40)
-                                //           ],
-                                //           xValueMapper: (MboaData sales, _) =>
-                                //               sales.day,
-                                //           yValueMapper: (MboaData sales, _) =>
-                                //               sales.state,
-                                //           // Enable data label
-                                //           dataLabelSettings:
-                                //               const DataLabelSettings(
-                                //                   isVisible: true)),
-                                //     ]),
+                             
                                 SfCircularChart(
                                     title: ChartTitle(
                                         text: 'Waste Collection Analysis'),
@@ -201,7 +171,7 @@ class MapViewState extends State<MapView> {
                                           dataLabelSettings:
                                               const DataLabelSettings(
                                                   isVisible: true)),
-                                    ])
+                                    ]),
                               ],
                             ),
                           ),
@@ -239,3 +209,44 @@ class MboaData {
 
   MboaData(this.day, this.state);
 }
+
+
+
+
+
+
+
+
+
+
+   // SfCartesianChart(
+                                //     primaryXAxis:
+                                //         CategoryAxis(name: "Waste Amount"),
+                                //     // Chart title
+                                //     title: ChartTitle(
+                                //         text: 'Waste production analysis'),
+
+                                //     // Enable tooltip
+                                //     tooltipBehavior: TooltipBehavior(
+                                //         enable: true,
+                                //         header: '',
+                                //         canShowMarker: false,
+                                //         format: 'point.x : point.y'),
+                                //     series: <BarSeries<MboaData, String>>[
+                                //       BarSeries<MboaData, String>(
+                                //           dataSource: <MboaData>[
+                                //             MboaData('Jan', 35),
+                                //             MboaData('Feb', 28),
+                                //             MboaData('Mar', 34),
+                                //             MboaData('Apr', 32),
+                                //             MboaData('May', 40)
+                                //           ],
+                                //           xValueMapper: (MboaData sales, _) =>
+                                //               sales.day,
+                                //           yValueMapper: (MboaData sales, _) =>
+                                //               sales.state,
+                                          // Enable data label
+                                //           dataLabelSettings:
+                                //               const DataLabelSettings(
+                                //                   isVisible: true)),
+                                //     ]),

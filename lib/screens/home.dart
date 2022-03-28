@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
         // hideNavigationBar: controller.index != 0 ? true : false,
         margin: const EdgeInsets.all(12.0),
         selectedTabScreenContext: (context) {},
-        backgroundColor: CupertinoColors.activeGreen,
+        backgroundColor: Color(0xFF20B08E),
         handleAndroidBackButtonPress: true,
         resizeToAvoidBottomInset: true,
         hideNavigationBarWhenKeyboardShows: true,
