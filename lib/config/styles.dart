@@ -4,8 +4,13 @@ import 'package:mboa_waste/config/palette.dart';
 class Styles {
   static TextStyle header = TextStyle(
     color: Palette.primary,
-    fontSize: 22.0,
+    fontSize: 30.0,
     fontWeight: FontWeight.bold,
+  );
+  static TextStyle subHeader = TextStyle(
+     color: Palette.primary.withOpacity(0.8),
+    fontSize: 15.0,
+    fontWeight: FontWeight.w400,
   );
 
   static TextStyle designWith(

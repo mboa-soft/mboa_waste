@@ -16,7 +16,7 @@ class CouncilBox extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MboabinView()));
+            context, MaterialPageRoute(builder: (context) => MboaBinView()));
       },
       child: Card(
         color: Palette.primary,
