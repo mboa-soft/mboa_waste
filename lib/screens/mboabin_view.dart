@@ -30,8 +30,8 @@ class _MboaBinViewState extends State<MboaBinView> {
             Container(
               height: MediaQuery.of(context).size.height * 0.4,
               width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                image: const DecorationImage(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
                   image: AssetImage('assets/images/city_bg.jpg'),
                   fit: BoxFit.cover,
                 ),
@@ -156,10 +156,10 @@ class _MboaBinViewState extends State<MboaBinView> {
                       ),
                       const SizedBox(height: 20.0),
                       widget.contentType == "Description"
-                          ? Description()
+                          ? const Description()
                           : widget.contentType == "Statistics"
-                              ? Statistics()
-                              : Comments(),
+                              ? const Statistics()
+                              : const Comments(),
                     ],
                   ),
                 ),
@@ -312,7 +312,7 @@ class Statistics extends StatelessWidget {
 
 class ActionButton extends StatelessWidget {
   final String title;
-  final void Function()  onTap;
+  final void Function() onTap;
   final Icon? icon;
   ActionButton({
     Key? key,
@@ -324,7 +324,7 @@ class ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:  onTap,
+      onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
         decoration: BoxDecoration(
