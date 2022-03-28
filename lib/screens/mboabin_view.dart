@@ -32,7 +32,9 @@ class _MboaBinViewState extends State<MboaBinView> {
               height: MediaQuery.of(context).size.height * 0.4,
               width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
+
                 image:   DecorationImage(
+
                   image: AssetImage('assets/images/city_bg.jpg'),
                   fit: BoxFit.cover,
                 ),

@@ -53,7 +53,7 @@ class Mboabin extends StatelessWidget {
                           borderRadius: BorderRadius.circular(18.0),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(4.0),
                           child: Row(
                             children: [
                               Icon(LineIcons.trash, color: Palette.primary),
