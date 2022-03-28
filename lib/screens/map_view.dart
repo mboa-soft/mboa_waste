@@ -228,6 +228,7 @@ class MapViewState extends State<MapView> {
           ),
         ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
           final GoogleMapController controller = await _controller.future;
