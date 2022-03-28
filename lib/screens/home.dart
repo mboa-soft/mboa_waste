@@ -77,7 +77,7 @@ class Main extends StatelessWidget {
           ]),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             children: <Widget>[
               const SizedBox(height: 20.0),
