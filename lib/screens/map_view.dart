@@ -180,17 +180,25 @@ class MapViewState extends State<MapView> {
                                 SfCircularChart(
                                     title: ChartTitle(
                                         text: 'Waste Collection Analysis'),
+                                    annotations: [
+                                      CircularChartAnnotation(
+                                          angle: 20,
+                                          radius: 'annotate',
+                                          widget: const Icon(Icons.map_rounded),
+                                          height: 'annotate',
+                                          width: 'annotate'),
+                                    ],
                                     legend: Legend(isVisible: true),
                                     series: <PieSeries<MboaData, String>>[
                                       PieSeries<MboaData, String>(
                                           explode: true,
                                           explodeIndex: 0,
                                           dataSource: <MboaData>[
-                                            MboaData('Jan', 35),
-                                            MboaData('Feb', 28),
-                                            MboaData('Mar', 34),
-                                            MboaData('Apr', 32),
-                                            MboaData('May', 40)
+                                            MboaData('Bata', 35),
+                                            MboaData('Olembe', 28),
+                                            MboaData('Emana', 34),
+                                            MboaData('Messassi', 32),
+                                            MboaData('Etoudi', 40)
                                           ],
                                           xValueMapper: (MboaData data, _) =>
                                               data.day,
