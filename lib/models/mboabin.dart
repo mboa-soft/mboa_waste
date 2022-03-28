@@ -62,7 +62,7 @@ class Mboabin {
       Mboabin.fromMap(json.decode(source));
 
   @override
-  String toStrilng() {
+  String toString() {
     return 'Mboabin(id: $id, name: $name, location: $location, councilID: $councilID)';
   }
 }

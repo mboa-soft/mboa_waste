@@ -8,6 +8,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:mboa_waste/config/palette.dart';
 import 'package:mboa_waste/config/styles.dart';
+import 'package:mboa_waste/screens/screens.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class MapView extends StatefulWidget {
@@ -26,7 +27,10 @@ class MapViewState extends State<MapView> {
       AndroidGoogleMapsFlutter.useAndroidViewSurface = true;
     }
     return Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
       body: GoogleMap(
+        myLocationButtonEnabled: true,
+        myLocationEnabled: true,
         padding: const EdgeInsets.only(bottom: 18.0, top: 10.0),
         mapType: MapType.hybrid,
         initialCameraPosition: const CameraPosition(
@@ -38,12 +42,12 @@ class MapViewState extends State<MapView> {
         },
         circles: {
           Circle(
-            circleId: const CircleId('1'),
             center: const LatLng(3.942232873265923, 16.518191532038795),
             radius: 100,
             fillColor: Palette.primary,
             strokeColor: Palette.dark,
-            strokeWidth: 1,
+            circleId: const CircleId('1'),
+            strokeWidth: 1
           ),
           Circle(
             circleId: const CircleId('2'),
@@ -51,7 +55,7 @@ class MapViewState extends State<MapView> {
             radius: 100,
             fillColor: Palette.primary,
             strokeColor: Palette.dark,
-            strokeWidth: 1,
+            strokeWidth: 1
           ),
         },
         markers: {
@@ -60,7 +64,7 @@ class MapViewState extends State<MapView> {
               icon: BitmapDescriptor.defaultMarker,
               infoWindow: InfoWindow(
                   title: "Mboabin Messassi",
-                  snippet: "Mboa bin located in Messassi, near Zoatupsi"),
+                  snippet: "Mboabin located in Messassi, near Zoatupsi"),
               position: LatLng(3.942232873265923, 11.518191532038795)),
           const Marker(
               markerId: MarkerId('mboabin8112'),
@@ -80,7 +84,7 @@ class MapViewState extends State<MapView> {
               markerId: MarkerId('mboabin8111'),
               icon: BitmapDescriptor.defaultMarker,
               infoWindow: InfoWindow(
-                  title: "Mboabin Messassi",
+                  title: "MboaBin Messassi",
                   snippet: "Mboa bin located in Messassi, near Zoatupsi"),
               position: LatLng(3.94266865168059, 11.51917706159022)),
           const Marker(
@@ -93,91 +97,8 @@ class MapViewState extends State<MapView> {
           Marker(
               markerId: const MarkerId('mboabin8101'),
               onTap: () {
-                showModalBottomSheet(
-                    context: context,
-                    backgroundColor: Colors.transparent,
-                    builder: (context) {
-                      return Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(32.0),
-                            topRight: Radius.circular(32.0),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(14.0),
-                          child: SingleChildScrollView(
-                            physics: const BouncingScrollPhysics(),
-                            child: Column(
-                              children: [
-                                Text(
-                                  "MBOABIN-008TH",
-                                  style: Styles.designWith(
-                                      color: Palette.primary,
-                                      size: 20.0,
-                                      bold: true),
-                                ),
-                                const SizedBox(height: 8.0),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Icon(Iconsax.location,
-                                            color: Palette.primary),
-                                        const Text("Yaounde I, Messassi"),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Icon(Iconsax.activity,
-                                            color: Palette.primary),
-                                        const Text("78%"),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        const Text("More"),
-                                        Icon(CupertinoIcons.download_circle,
-                                            color: Palette.primary),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                             
-                                SfCircularChart(
-                                    title: ChartTitle(
-                                        text: 'Waste Collection Analysis'),
-                                    legend: Legend(isVisible: true),
-                                    series: <PieSeries<MboaData, String>>[
-                                      PieSeries<MboaData, String>(
-                                          explode: true,
-                                          explodeIndex: 0,
-                                          dataSource: <MboaData>[
-                                            MboaData('Jan', 35),
-                                            MboaData('Feb', 28),
-                                            MboaData('Mar', 34),
-                                            MboaData('Apr', 32),
-                                            MboaData('May', 40)
-                                          ],
-                                          xValueMapper: (MboaData data, _) =>
-                                              data.day,
-                                          yValueMapper: (MboaData data, _) =>
-                                              data.state,
-                                          dataLabelMapper: (MboaData data, _) =>
-                                              data.day,
-                                          dataLabelSettings:
-                                              const DataLabelSettings(
-                                                  isVisible: true)),
-                                    ]),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    });
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MboaBinView()));
               },
               icon: BitmapDescriptor.defaultMarker,
               infoWindow: const InfoWindow(
@@ -186,18 +107,21 @@ class MapViewState extends State<MapView> {
               position: const LatLng(3.94170710169969, 11.518659002751367)),
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          final GoogleMapController controller = await _controller.future;
-          controller.animateCamera(CameraUpdate.newCameraPosition(
-              const CameraPosition(
-                  bearing: 192.8334901395799,
-                  target: LatLng(3.94266865168059, 11.51917706159022),
-                  tilt: 59.440717697143555,
-                  zoom: 19.151926040649414)));
-        },
-        label: const Text("Go"),
-        icon: const Icon(LineIcons.plusCircle),
+      floatingActionButton: Container(
+        margin: const EdgeInsets.only(bottom: 40.0, right: 10),
+        child: FloatingActionButton.extended(
+          onPressed: () async {
+            final GoogleMapController controller = await _controller.future;
+            controller.animateCamera(CameraUpdate.newCameraPosition(
+                const CameraPosition(
+                    bearing: 192.8334901395799,
+                    target: LatLng(3.94266865168059, 11.51917706159022),
+                    tilt: 59.440717697143555,
+                    zoom: 19.151926040649414,)));
+          },
+          label: const Text("Go"),
+          icon:  const Icon(LineIcons.plusCircle),
+        ),
       ),
     );
   }

@@ -8,7 +8,7 @@ class ActionButton extends StatelessWidget {
   final String title;
   final void Function()  onTap;
   final Icon? icon;
-  ActionButton({
+  const ActionButton({
     Key? key,
     required this.title,
     required this.onTap,
@@ -20,7 +20,7 @@ class ActionButton extends StatelessWidget {
     return GestureDetector(
       onTap:  onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
         decoration: BoxDecoration(
           color: Palette.primary,
           borderRadius: const BorderRadius.all(Radius.circular(30)),

@@ -31,8 +31,8 @@ class _MboaBinViewState extends State<MboaBinView> {
             Container(
               height: MediaQuery.of(context).size.height * 0.4,
               width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                image: const DecorationImage(
+              decoration: const BoxDecoration(
+                image:   DecorationImage(
                   image: AssetImage('assets/images/city_bg.jpg'),
                   fit: BoxFit.cover,
                 ),
@@ -76,7 +76,7 @@ class _MboaBinViewState extends State<MboaBinView> {
                             borderRadius: BorderRadius.circular(18.0),
                           ),
                           child: IconButton(
-                            icon: Icon(Icons.notifications),
+                            icon: const Icon(Icons.notifications),
                             onPressed: () {},
                           ),
                         ),
@@ -86,7 +86,7 @@ class _MboaBinViewState extends State<MboaBinView> {
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width,
               child: SingleChildScrollView(
                 child: Padding(
@@ -157,10 +157,10 @@ class _MboaBinViewState extends State<MboaBinView> {
                       ),
                       const SizedBox(height: 20.0),
                       widget.contentType == "Description"
-                          ? Description()
+                          ? const Description()
                           : widget.contentType == "Statistics"
-                              ? Statistics()
-                              : Comments(),
+                              ? const Statistics()
+                              : const Comments(),
                     ],
                   ),
                 ),
@@ -178,35 +178,33 @@ class Description extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Icon(LineIcons.mapMarker, color: Palette.primary),
-              Text("Essos Hotel du plateau Yaounde", style: Styles.subHeader),
-            ],
-          ),
-          Row(
-            children: [
-              Icon(LineIcons.clock, color: Palette.primary),
-              Text("Friday, 3 March 2022 13:45", style: Styles.subHeader),
-            ],
-          ),
-          const SizedBox(height: 20.0),
-          SleekCircularSlider(
-              appearance: CircularSliderAppearance(
-                customColors: CustomSliderColors(
-                  progressBarColor: Palette.primary,
-                  trackColor: Palette.primary.withOpacity(0.3),
-                  shadowColor: Palette.primary.withOpacity(0.3),
-                ),
+    return Column(
+      children: [
+        Row(
+          children: [
+            Icon(LineIcons.mapMarker, color: Palette.primary),
+            Text("Essos Hotel du plateau Yaounde", style: Styles.subHeader),
+          ],
+        ),
+        Row(
+          children: [
+            Icon(LineIcons.clock, color: Palette.primary),
+            Text("Friday, 3 March 2022 13:45", style: Styles.subHeader),
+          ],
+        ),
+        const SizedBox(height: 20.0),
+        SleekCircularSlider(
+            appearance: CircularSliderAppearance(
+              customColors: CustomSliderColors(
+                progressBarColor: Palette.primary,
+                trackColor: Palette.primary.withOpacity(0.3),
+                shadowColor: Palette.primary.withOpacity(0.3),
               ),
-              onChange: (double value) {
-                print(value);
-              }),
-        ],
-      ),
+            ),
+            onChange: (double value) {
+            
+            }),
+      ],
     );
   }
 }
@@ -216,12 +214,10 @@ class Comments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text(
-          'Comments',
-          style: Styles.header,
-        ),
+    return Center(
+      child: Text(
+        'Comments',
+        style: Styles.header,
       ),
     );
   }
@@ -299,7 +295,7 @@ class Statistics extends StatelessWidget {
               ActionButton(
                 title: "Download Stats",
                 onTap: () {
-                  print("hello button");
+                 
                 },
                 icon: const Icon(Icons.download, color: Colors.white),
               ),

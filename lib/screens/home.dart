@@ -6,6 +6,7 @@ import 'package:mboa_waste/config/styles.dart';
 import 'package:mboa_waste/screens/screens.dart';
 import 'package:mboa_waste/widgets/widgets.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -14,8 +15,8 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
   final controller = PersistentTabController(initialIndex: 0);
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scrollable(
@@ -28,7 +29,7 @@ class _HomeState extends State<Home> {
         // hideNavigationBar: controller.index != 0 ? true : false,
         margin: const EdgeInsets.all(12.0),
         selectedTabScreenContext: (context) {},
-        backgroundColor: Color(0xFF20B08E),
+        backgroundColor: const Color(0xFF20B08E),
         handleAndroidBackButtonPress: true,
         resizeToAvoidBottomInset: true,
         hideNavigationBarWhenKeyboardShows: true,
@@ -59,6 +60,7 @@ class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    
       appBar: AppBar(
           backgroundColor: Colors.white54,
           title: Text(
@@ -68,11 +70,16 @@ class Main extends StatelessWidget {
           ),
           centerTitle: true,
           elevation: 0.0,
-          leading: const Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: CircleAvatar(
-              radius: 25.0,
-              backgroundImage: AssetImage('assets/images/profile_pic.jpeg'),
+          leading:  Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: GestureDetector(
+              onTap: () {
+                controller.jumpToTab(3);
+              },
+              child: const CircleAvatar(
+                radius: 25.0,
+                backgroundImage: AssetImage('assets/images/profile_pic.jpeg'),
+              ),
             ),
           ),
           actions: [
@@ -85,34 +92,32 @@ class Main extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+          
             children: <Widget>[
               const SizedBox(height: 20.0),
-              const Text(
-                  "Recycling every single solid waste, Give it a second life, put it back into the value chain"),
-              const SizedBox(height: 20.0),
-              Container(
-                height: 50.0,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
-                  borderRadius: BorderRadius.circular(24.0),
-                ),
-                child: const TextField(
-                  decoration: InputDecoration(
-                    icon: Padding(
-                      padding: EdgeInsets.only(left: 12.0),
-                      child: Icon(LineIcons.search),
-                    ),
-                    border: InputBorder.none,
-                    hintText: "Give it a second life",
-                    contentPadding: EdgeInsets.all(10.0),
-                    hintStyle: TextStyle(
-                      fontSize: 18.0,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20.0),
+               SfCartesianChart(
+            // Initialize category axis
+            primaryXAxis: CategoryAxis(),
+
+            series: <LineSeries<SalesData, String>>[
+              LineSeries<SalesData, String>(
+                // Bind data source
+                dataSource:  <SalesData>[
+                  SalesData('Jan', 35),
+                  SalesData('Feb', 28),
+                  SalesData('Mar', 34),
+                  SalesData('Apr', 32),
+                  SalesData('May', 40)
+                ],
+                xValueMapper: (SalesData sales, _) => sales.year,
+                yValueMapper: (SalesData sales, _) => sales.sales
+              )
+            ]
+          ),
+             const  SizedBox(height: 20.0),
+              Text("Cities", style: Styles.header,),
+            const  SizedBox(height: 5,),
               SizedBox(
                 height: 70.0,
                 child: ListView.builder(
@@ -130,6 +135,12 @@ class Main extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20.0),
+              Text(
+                'Communities',
+                style: Styles.designWith(
+                    color: Colors.black, size: 18.0, bold: true),
+              ),
+              const SizedBox(height: 5.0),
               SizedBox(
                 height: 170.0,
                 child: ListView.builder(
@@ -190,4 +201,9 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
       inactiveColorPrimary: Colors.white70,
     ),
   ];
+}
+class SalesData {
+  SalesData(this.year, this.sales);
+  final String year;
+  final double sales;
 }
