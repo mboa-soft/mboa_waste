@@ -8,6 +8,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import '../config/palette.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
+import '../widgets/action_button.dart';
 import 'map_view.dart';
 
 class MboaBinView extends StatefulWidget {
@@ -305,46 +306,6 @@ class Statistics extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class ActionButton extends StatelessWidget {
-  final String title;
-  final void Function()  onTap;
-  final Icon? icon;
-  ActionButton({
-    Key? key,
-    required this.title,
-    required this.onTap,
-    this.icon,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap:  onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
-        decoration: BoxDecoration(
-          color: Palette.primary,
-          borderRadius: const BorderRadius.all(Radius.circular(30)),
-        ),
-        child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              icon ?? const SizedBox.shrink(),
-              const SizedBox(
-                width: 10,
-              ),
-              Text(
-                title,
-                style:
-                    Styles.header.copyWith(color: Colors.white, fontSize: 20),
-              )
-            ]),
       ),
     );
   }

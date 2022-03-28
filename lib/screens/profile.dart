@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../config/palette.dart';
 import '../config/styles.dart';
+import '../widgets/widgets.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
@@ -40,7 +41,11 @@ class Profile extends StatelessWidget {
           const SizedBox(height: 5.0),
           Text("69059606",style: Styles.subHeader.copyWith(color: Palette.primary.withOpacity(0.5), fontSize: 16.0, fontWeight: FontWeight.w600)),
           const SizedBox(height: 25.0),
-          
+          ActionButton(
+            title: "Edit Profile",
+            onTap: () {},
+            icon: Icon(Icons.edit, color: Colors.white),
+          ),
           // Button
           // Action
 
