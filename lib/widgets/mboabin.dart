@@ -12,8 +12,8 @@ class Mboabin extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) =>  MboaBinView()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MboaBinView()));
       },
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -21,12 +21,15 @@ class Mboabin extends StatelessWidget {
           width: 250.0,
           height: 170.0,
           decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.7),
             border: Border.all(
               color: Palette.primary,
               width: 1.0,
             ),
             image: const DecorationImage(
-              image: AssetImage('assets/images/city_bg.jpg'),
+              opacity: 0.5,
+              image: NetworkImage(
+                  'https://www.afrik21.africa/wp-content/uploads/2019/12/shutterstock_1094501483.jpg'),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(12.0),
@@ -40,7 +43,7 @@ class Mboabin extends StatelessWidget {
                     alignment: Alignment.topRight,
                     child: Container(
                         height: 35.0,
-                        width: 68.0,
+                        width: 70.0,
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: Palette.primary,
@@ -53,9 +56,11 @@ class Mboabin extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             children: [
-                              Icon(LineIcons.trash, color: Palette.grey),
-                              const SizedBox(width: 4.0),
-                              const Text("70%"),
+                              Icon(LineIcons.trash, color: Palette.primary),
+                              const SizedBox(width: 2.0),
+                              Text("70%",
+                                  style: Styles.subHeader.copyWith(
+                                      color: Colors.white, fontSize: 15.0)),
                             ],
                           ),
                         ))),
@@ -71,7 +76,7 @@ class Mboabin extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(LineIcons.mapMarker, color: Palette.primary),
-                        const Text("30km away"),
+                        Text("30km away", style: Styles.subHeader),
                       ],
                     )),
               ],

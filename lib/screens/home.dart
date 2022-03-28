@@ -60,6 +60,7 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          backgroundColor: Colors.white54,
           title: Text(
             "Mboawaste",
             style: Styles.designWith(
@@ -67,8 +68,13 @@ class Main extends StatelessWidget {
           ),
           centerTitle: true,
           elevation: 0.0,
-          backgroundColor: Colors.white54,
-          leading: Icon(LineIcons.user, color: Palette.primary),
+          leading: const Padding(
+            padding: EdgeInsets.only(left: 8.0),
+            child: CircleAvatar(
+              radius: 25.0,
+              backgroundImage: AssetImage('assets/images/profile_pic.jpeg'),
+            ),
+          ),
           actions: [
             IconButton(
               icon: Icon(Icons.notifications, color: Palette.primary),
@@ -153,7 +159,7 @@ List<Widget> _buildScreens() {
     const Main(),
     const Main(),
     const MapView(),
-    const Main(),
+    const Profile(),
   ];
 }
 
@@ -178,7 +184,7 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
       inactiveColorPrimary: Colors.white70,
     ),
     PersistentBottomNavBarItem(
-      icon: const Icon(CupertinoIcons.barcode),
+      icon: const Icon(CupertinoIcons.person),
       title: ("Profile"),
       activeColorPrimary: CupertinoColors.white,
       inactiveColorPrimary: Colors.white70,

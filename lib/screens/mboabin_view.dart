@@ -98,32 +98,6 @@ class _MboaBinViewState extends State<MboaBinView> {
                         style: Styles.header,
                       ),
                       const SizedBox(height: 10.0),
-                      Row(
-                        children: [
-                          Icon(LineIcons.mapMarker, color: Palette.primary),
-                          Text("Essos Hotel du plateau Yaounde",
-                              style: Styles.subHeader),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Icon(LineIcons.clock, color: Palette.primary),
-                          Text("Friday, 3 March 2022 13:45",
-                              style: Styles.subHeader),
-                        ],
-                      ),
-                      const SizedBox(height: 20.0),
-                      SleekCircularSlider(
-                          appearance: CircularSliderAppearance(
-                            customColors: CustomSliderColors(
-                              progressBarColor: Palette.primary,
-                              trackColor: Palette.primary.withOpacity(0.3),
-                              shadowColor: Palette.primary.withOpacity(0.3),
-                            ),
-                          ),
-                          onChange: (double value) {
-                            print(value);
-                          }),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Row(
@@ -149,7 +123,6 @@ class _MboaBinViewState extends State<MboaBinView> {
                               onTap: () {
                                 setState(() {
                                   widget.contentType = "Statistics";
-                                  print("Statistics");
                                 });
                               },
                               child: Text("Statistics",
@@ -166,7 +139,6 @@ class _MboaBinViewState extends State<MboaBinView> {
                               onTap: () {
                                 setState(() {
                                   widget.contentType = "Comments";
-                                  print("Comments");
                                 });
                               },
                               child: Text("Comments",
@@ -206,11 +178,33 @@ class Description extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
-        child: Text(
-          'Description',
-          style: Styles.header,
-        ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Icon(LineIcons.mapMarker, color: Palette.primary),
+              Text("Essos Hotel du plateau Yaounde", style: Styles.subHeader),
+            ],
+          ),
+          Row(
+            children: [
+              Icon(LineIcons.clock, color: Palette.primary),
+              Text("Friday, 3 March 2022 13:45", style: Styles.subHeader),
+            ],
+          ),
+          const SizedBox(height: 20.0),
+          SleekCircularSlider(
+              appearance: CircularSliderAppearance(
+                customColors: CustomSliderColors(
+                  progressBarColor: Palette.primary,
+                  trackColor: Palette.primary.withOpacity(0.3),
+                  shadowColor: Palette.primary.withOpacity(0.3),
+                ),
+              ),
+              onChange: (double value) {
+                print(value);
+              }),
+        ],
       ),
     );
   }
@@ -246,7 +240,7 @@ class Statistics extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(14.0),
+        padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
@@ -301,9 +295,56 @@ class Statistics extends StatelessWidget {
                         dataLabelSettings:
                             const DataLabelSettings(isVisible: true)),
                   ]),
+              ActionButton(
+                title: "Download Stats",
+                onTap: () {
+                  print("hello button");
+                },
+                icon: const Icon(Icons.download, color: Colors.white),
+              ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ActionButton extends StatelessWidget {
+  final String title;
+  final void Function()  onTap;
+  final Icon? icon;
+  ActionButton({
+    Key? key,
+    required this.title,
+    required this.onTap,
+    this.icon,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap:  onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
+        decoration: BoxDecoration(
+          color: Palette.primary,
+          borderRadius: const BorderRadius.all(Radius.circular(30)),
+        ),
+        child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              icon ?? const SizedBox.shrink(),
+              const SizedBox(
+                width: 10,
+              ),
+              Text(
+                title,
+                style:
+                    Styles.header.copyWith(color: Colors.white, fontSize: 20),
+              )
+            ]),
       ),
     );
   }
