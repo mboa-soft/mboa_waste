@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 /// ⚡⚡⚡ ---------- CLASS MBOABIN ------------------⚡⚡⚡
 /// @author: Baimam Boukar Jean Jacques
 /// @since: March 27th 2022
@@ -15,7 +17,7 @@ import 'dart:convert';
 class Mboabin {
   final String id;
   final String name;
-  final Coordinates location;
+  final LatLng location;
   final String councilID;
 
   Mboabin(
@@ -27,7 +29,7 @@ class Mboabin {
   Mboabin copyWith({
     String? id,
     String? name,
-    Coordinates? location,
+    LatLng? location,
     String? councilID,
   }) {
     return Mboabin(
@@ -42,7 +44,7 @@ class Mboabin {
     return {
       'id': id,
       'name': name,
-      'location': location.toMap(),
+      'location': location,
       'councilID': councilID,
     };
   }
@@ -51,7 +53,7 @@ class Mboabin {
     return Mboabin(
       id: map['id'] ?? '',
       name: map['name'] ?? '',
-      location: Coordinates.fromMap(map['location']),
+      location: map['location'] ?? const LatLng(0, 0),
       councilID: map['councilID'] ?? '',
     );
   }
@@ -65,55 +67,4 @@ class Mboabin {
   String toString() {
     return 'Mboabin(id: $id, name: $name, location: $location, councilID: $councilID)';
   }
-}
-
-/// ⚡⚡⚡ ---------- CLASS COORDINATES ------------------⚡⚡⚡
-///
-/// Contains model of gelocation coordinates to easily integrate markers
-/// and location points on the map.
-/// Data Attributes:
-/// 📌 lattitude: lattitude of the mboabin location ✅
-/// 📌 longitude: longitude of the mboabin location ✅
-///
-class Coordinates {
-  final String latittude;
-  final String longitude;
-
-  Coordinates(
-    this.latittude,
-    this.longitude,
-  );
-
-  Coordinates copyWith({
-    String? latittude,
-    String? longitude,
-  }) {
-    return Coordinates(
-      latittude ?? this.latittude,
-      longitude ?? this.longitude,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'latittude': latittude,
-      'longitude': longitude,
-    };
-  }
-
-  factory Coordinates.fromMap(Map<String, dynamic> map) {
-    return Coordinates(
-      map['latittude'] ?? '',
-      map['longitude'] ?? '',
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Coordinates.fromJson(String source) =>
-      Coordinates.fromMap(json.decode(source));
-
-  @override
-  String toString() =>
-      'Coordinates(latittude: $latittude, longitude: $longitude)';
 }

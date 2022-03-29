@@ -75,7 +75,7 @@ class _MboaBinViewState extends State<MboaBinView> {
                             borderRadius: BorderRadius.circular(18.0),
                           ),
                           child: IconButton(
-                            icon: Icon(Icons.notifications),
+                            icon: const Icon(Icons.notifications),
                             onPressed: () {},
                           ),
                         ),
@@ -201,9 +201,7 @@ class Description extends StatelessWidget {
                   shadowColor: Palette.primary.withOpacity(0.3),
                 ),
               ),
-              onChange: (double value) {
-                print(value);
-              }),
+              onChange: (double value) {}),
         ],
       ),
     );
