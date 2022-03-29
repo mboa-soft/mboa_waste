@@ -47,87 +47,61 @@ class MapViewState extends State<MapView> {
             padding: const EdgeInsets.only(bottom: 18.0, top: 10.0),
             mapType: MapType.hybrid,
             initialCameraPosition: const CameraPosition(
-              target: LatLng(3.871077024574833, 11.584026389488624),
+              target: LatLng(3.791669144926595, 10.134238671434186),
               zoom: 19.151926040649414,
             ),
             onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
             },
+            tileOverlays: {
+              const TileOverlay(tileOverlayId: TileOverlayId('overlay'))
+            },
             polygons: {
-              const Polygon(polygonId: PolygonId('polygon_1'), holes: [
-                [
-                  LatLng(3.7926414838375844, 10.135785646384857),
-                  LatLng(3.791669144926595, 10.134238671434186),
-                  LatLng(3.7929331852976023, 10.134725907639123),
-                  LatLng(3.79191222975688, 10.131583234117286)
-                ],
-                [
-                  LatLng(3.7926414838375844, 10.135785646384857),
-                  LatLng(3.791669144926595, 10.134238671434186),
-                  LatLng(3.7929331852976023, 10.134725907639123),
-                  LatLng(3.79191222975688, 10.131583234117286)
-                ],
-              ], points: [
-                LatLng(12.96699, 77.71096),
-                LatLng(10.1191, 3.7994),
-                LatLng(11.96699, 77.71096),
-                LatLng(9.1191, 3.7994)
-              ]),
+              Polygon(
+                  geodesic: true,
+                  strokeWidth: 2,
+                  strokeColor: Colors.red.withOpacity(.2),
+                  polygonId: const PolygonId('polygon_1'),
+                  holes: const [
+                    [
+                      LatLng(3.7926414838375844, 10.135785646384857),
+                      LatLng(3.791669144926595, 10.134238671434186),
+                      LatLng(3.7929331852976023, 10.134725907639123),
+                      LatLng(3.79191222975688, 10.131583234117286)
+                    ],
+                    [
+                      LatLng(3.7926414838375844, 10.135785646384857),
+                      LatLng(3.791669144926595, 10.134238671434186),
+                      LatLng(3.7929331852976023, 10.134725907639123),
+                      LatLng(3.79191222975688, 10.131583234117286)
+                    ],
+                  ],
+                  points: const [
+                    LatLng(12.96699, 77.71096),
+                    LatLng(10.1191, 3.7994),
+                    LatLng(11.96699, 77.71096),
+                    LatLng(9.1191, 3.7994)
+                  ]),
             },
             circles: {
               Circle(
                 circleId: const CircleId('1'),
                 center: const LatLng(3.79191222975688, 10.131583234117286),
-                radius: 100,
-                fillColor: Palette.primary,
+                radius: 18,
+                fillColor: Palette.primary.withOpacity(.15),
                 strokeColor: Palette.dark,
                 strokeWidth: 1,
               ),
               Circle(
                 circleId: const CircleId('2'),
                 center: const LatLng(3.7929331852976023, 10.134725907639123),
-                radius: 100,
-                fillColor: Palette.primary,
+                radius: 36,
+                fillColor: Colors.red.withOpacity(.085),
                 strokeColor: Palette.dark,
                 strokeWidth: 1,
               ),
             },
             markers: {
-              const Marker(
-                  markerId: MarkerId('mboabin8113'),
-                  icon: BitmapDescriptor.defaultMarker,
-                  infoWindow: InfoWindow(
-                      title: "Mboabin Messassi",
-                      snippet: "Mboa bin located in Messassi, near Zoatupsi"),
-                  position: LatLng(3.942232873265923, 11.518191532038795)),
-              const Marker(
-                  markerId: MarkerId('mboabin8112'),
-                  icon: BitmapDescriptor.defaultMarker,
-                  infoWindow: InfoWindow(
-                      title: "Mboabin Messassi",
-                      snippet: "Mboa bin located in Messassi, near Zoatupsi"),
-                  position: LatLng(3.9420312137911986, 11.51875692350712)),
-              const Marker(
-                  markerId: MarkerId('mboabin8119'),
-                  icon: BitmapDescriptor.defaultMarker,
-                  infoWindow: InfoWindow(
-                      title: "Mboabin Messassi",
-                      snippet: "Mboa bin located in Messassi, near Zoatupsi"),
-                  position: LatLng(3.9415341151368493, 11.517668732629094)),
-              const Marker(
-                  markerId: MarkerId('mboabin8111'),
-                  icon: BitmapDescriptor.defaultMarker,
-                  infoWindow: InfoWindow(
-                      title: "Mboabin Messassi",
-                      snippet: "Mboa bin located in Messassi, near Zoatupsi"),
-                  position: LatLng(3.94266865168059, 11.51917706159022)),
-              const Marker(
-                  markerId: MarkerId('mboabin8110'),
-                  icon: BitmapDescriptor.defaultMarker,
-                  infoWindow: InfoWindow(
-                      title: "Mboabin Messassi",
-                      snippet: "Mboa bin located in Messassi, near Zoatupsi"),
-                  position: LatLng(3.9420312137911986, 11.51875692350712)),
               Marker(
                   markerId: const MarkerId('mboabin8101'),
                   onTap: () {
@@ -232,7 +206,8 @@ class MapViewState extends State<MapView> {
                   infoWindow: const InfoWindow(
                       title: "Mboabin Messassi",
                       snippet: "Mboa bin located in Messassi, near Zoatupsi"),
-                  position: const LatLng(3.94170710169969, 11.518659002751367)),
+                  position:
+                      const LatLng(3.7929331852976023, 10.134725907639123)),
             },
           ),
         ],
@@ -244,7 +219,7 @@ class MapViewState extends State<MapView> {
           controller.animateCamera(CameraUpdate.newCameraPosition(
               const CameraPosition(
                   bearing: 192.8334901395799,
-                  target: LatLng(3.94266865168059, 11.51917706159022),
+                  target: LatLng(3.791669144926595, 10.134238671434186),
                   tilt: 59.440717697143555,
                   zoom: 19.151926040649414)));
         },
