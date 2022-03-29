@@ -124,102 +124,13 @@ class MapViewState extends State<MapView> {
               Marker(
                   markerId: const MarkerId('mboabin8101'),
                   onTap: () {
-                    showModalBottomSheet(
-                        context: context,
-                        backgroundColor: Colors.transparent,
-                        builder: (context) {
-                          return Container(
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(32.0),
-                                topRight: Radius.circular(32.0),
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(14.0),
-                              child: SingleChildScrollView(
-                                physics: const BouncingScrollPhysics(),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "MBOABIN-008TH",
-                                      style: Styles.designWith(
-                                          color: Palette.primary,
-                                          size: 20.0,
-                                          bold: true),
-                                    ),
-                                    const SizedBox(height: 8.0),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Icon(Iconsax.location,
-                                                color: Palette.primary),
-                                            const Text("Yaounde I, Messassi"),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Icon(Iconsax.activity,
-                                                color: Palette.primary),
-                                            const Text("78%"),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Text("More"),
-                                            Icon(CupertinoIcons.download_circle,
-                                                color: Palette.primary),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    SfCircularChart(
-                                        title: ChartTitle(
-                                            text: 'Waste Collection Analysis'),
-                                        annotations: [
-                                          CircularChartAnnotation(
-                                              angle: 20,
-                                              radius: 'annotate',
-                                              widget:
-                                                  const Icon(Icons.map_rounded),
-                                              height: 'annotate',
-                                              width: 'annotate'),
-                                        ],
-                                        legend: Legend(isVisible: true),
-                                        series: <PieSeries<MboaData, String>>[
-                                          PieSeries<MboaData, String>(
-                                              explode: true,
-                                              explodeIndex: 0,
-                                              dataSource: <MboaData>[
-                                                MboaData('Bata', 35),
-                                                MboaData('Olembe', 28),
-                                                MboaData('Emana', 34),
-                                                MboaData('Messassi', 32),
-                                                MboaData('Etoudi', 40)
-                                              ],
-                                              xValueMapper:
-                                                  (MboaData data, _) =>
-                                                      data.day,
-                                              yValueMapper:
-                                                  (MboaData data, _) =>
-                                                      data.state,
-                                              dataLabelMapper:
-                                                  (MboaData data, _) =>
-                                                      data.day,
-                                              dataLabelSettings:
-                                                  const DataLabelSettings(
-                                                      isVisible: true)),
-                                        ]),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MboaBinView(),
+                      ),
+                    );
+                  
                   },
                   icon: BitmapDescriptor.defaultMarker,
                   infoWindow: const InfoWindow(
