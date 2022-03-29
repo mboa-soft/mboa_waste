@@ -60,15 +60,24 @@ class MapViewState extends State<MapView> {
                   LatLng(3.791669144926595, 10.134238671434186),
                   LatLng(3.7929331852976023, 10.134725907639123),
                   LatLng(3.79191222975688, 10.131583234117286)
-                ]
+                ],
+                [
+                  LatLng(3.7926414838375844, 10.135785646384857),
+                  LatLng(3.791669144926595, 10.134238671434186),
+                  LatLng(3.7929331852976023, 10.134725907639123),
+                  LatLng(3.79191222975688, 10.131583234117286)
+                ],
               ], points: [
-                LatLng(12.96699, 77.71096)
+                LatLng(12.96699, 77.71096),
+                LatLng(10.1191, 3.7994),
+                LatLng(11.96699, 77.71096),
+                LatLng(9.1191, 3.7994)
               ]),
             },
             circles: {
               Circle(
                 circleId: const CircleId('1'),
-                center: const LatLng(3.942232873265923, 16.518191532038795),
+                center: const LatLng(3.79191222975688, 10.131583234117286),
                 radius: 100,
                 fillColor: Palette.primary,
                 strokeColor: Palette.dark,
@@ -76,7 +85,7 @@ class MapViewState extends State<MapView> {
               ),
               Circle(
                 circleId: const CircleId('2'),
-                center: const LatLng(3.942232873265923, 16.518191532038795),
+                center: const LatLng(3.7929331852976023, 10.134725907639123),
                 radius: 100,
                 fillColor: Palette.primary,
                 strokeColor: Palette.dark,
