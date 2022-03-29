@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:mboa_waste/config/data.dart';
 import 'package:mboa_waste/config/palette.dart';
 import 'package:mboa_waste/config/styles.dart';
 import 'package:mboa_waste/screens/screens.dart';
@@ -20,7 +21,25 @@ class MapView extends StatefulWidget {
 
 class MapViewState extends State<MapView> {
   final Completer<GoogleMapController> _controller = Completer();
-
+  GoogleMapController? _mapController;
+  final Set<Circle> _circles = <Circle>{
+    Circle(
+      circleId: const CircleId('1'),
+      center: const LatLng(3.79191222975688, 10.131583234117286),
+      radius: 18,
+      fillColor: Palette.primary.withOpacity(.15),
+      strokeColor: Palette.dark,
+      strokeWidth: 1,
+    ),
+    Circle(
+      circleId: const CircleId('2'),
+      center: const LatLng(3.7929331852976023, 10.134725907639123),
+      radius: 36,
+      fillColor: Colors.red.withOpacity(.085),
+      strokeColor: Palette.dark,
+      strokeWidth: 1,
+    ),
+  };
   @override
   Widget build(BuildContext context) {
     if (defaultTargetPlatform == TargetPlatform.android) {
@@ -30,61 +49,50 @@ class MapViewState extends State<MapView> {
 
       body: Stack(
         children: [
-          Positioned(
-              top: 45.0,
-              child: Row(
-                children: [
-                  IconButton(
-                      onPressed: () {},
-                      icon:
-                          Icon(Iconsax.map, size: 32, color: Palette.primary)),
-                  IconButton(
-                      onPressed: () {},
-                      icon: Icon(Iconsax.map, size: 32, color: Palette.primary))
-                ],
-              )),
+          // Positioned(
+          //     top: 45.0,
+          //     child: Row(
+          //       children: [
+          //         IconButton(
+          //             onPressed: () {},
+          //             icon:
+          //                 Icon(Iconsax.map, size: 32, color: Palette.primary)),
+          //         IconButton(
+          //             onPressed: () {},
+          //             icon: Icon(Iconsax.map, size: 32, color: Palette.primary))
+          //       ],
+          //     )),
           GoogleMap(
             myLocationEnabled: true,
             myLocationButtonEnabled: true,
             padding: const EdgeInsets.only(bottom: 18.0, top: 10.0),
             mapType: MapType.hybrid,
             initialCameraPosition: const CameraPosition(
-              target: LatLng(3.871077024574833, 11.584026389488624),
+              target: LatLng(3.791669144926595, 10.134238671434186),
               zoom: 19.151926040649414,
             ),
+            // onLongPress: (LatLng latLng) {
+            //   _circles.add(Circle(
+            //     consumeTapEvents: true,
+            //     circleId: const CircleId('blue'),
+            //     center: latLng,
+            //     radius: 200.0,
+            //     fillColor: Colors.blue.shade500.withOpacity(.5),
+            //     strokeColor: Colors.green.shade700.withOpacity(.7),
+            //     strokeWidth: 5,
+            //   ));
+
+            //   setState(() {
+            //     _mapController?.animateCamera(CameraUpdate.newLatLng(latLng));
+            //   });
+            // },
             onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
             },
-            polygons: {
-              const Polygon(polygonId: PolygonId('polygon_1'), holes: [
-                [
-                  LatLng(3.7926414838375844, 10.135785646384857),
-                  LatLng(3.791669144926595, 10.134238671434186),
-                  LatLng(3.7929331852976023, 10.134725907639123),
-                  LatLng(3.79191222975688, 10.131583234117286)
-                ]
-              ], points: [
-                LatLng(12.96699, 77.71096)
-              ]),
+            tileOverlays: {
+              const TileOverlay(tileOverlayId: TileOverlayId('overlay'))
             },
-            circles: {
-              Circle(
-                circleId: const CircleId('1'),
-                center: const LatLng(3.942232873265923, 16.518191532038795),
-                radius: 100,
-                fillColor: Palette.primary,
-                strokeColor: Palette.dark,
-                strokeWidth: 1,
-              ),
-              Circle(
-                circleId: const CircleId('2'),
-                center: const LatLng(3.942232873265923, 16.518191532038795),
-                radius: 100,
-                fillColor: Palette.primary,
-                strokeColor: Palette.dark,
-                strokeWidth: 1,
-              ),
-            },
+
             markers: {
               const Marker(
                   markerId: MarkerId('mboabin8113'),
@@ -137,26 +145,66 @@ class MapViewState extends State<MapView> {
                       title: "Mboabin Messassi",
                       snippet: "Mboa bin located in Messassi, near Zoatupsi"),
                   position: const LatLng(3.94170710169969, 11.518659002751367)),
+
+            polygons: {
+              Polygon(
+                  geodesic: false,
+                  strokeWidth: 4,
+                  fillColor: Colors.transparent,
+                  zIndex: 10,
+                  strokeColor: Colors.red.withOpacity(.2),
+                  polygonId: const PolygonId('polygon_1'),
+                  holes: const [
+                    [
+                      LatLng(3.7926414838375844, 10.135785646384857),
+                      LatLng(4.1191, 3.7994),
+                      LatLng(3.8, 10.131583234117286),
+                      LatLng(3.79191222975688, 10.131583234117286),
+                    ],
+                  ],
+                  points: const [
+                    LatLng(12.96699, 77.71096),
+                    LatLng(10.1191, 3.7994),
+                    LatLng(11.96699, 77.71096),
+                    LatLng(9.1191, 3.7994)
+                  ]),
             },
+            circles: _circles,
+            markers: mboabins
+                .map(
+                  (bin) => Marker(
+                      markerId: MarkerId(bin.id),
+                      onTap: () => showBottomSheet(
+                          context: context,
+                          backgroundColor: Colors.transparent,
+                          builder: (context) => const SheetContainer()),
+                      icon: BitmapDescriptor.defaultMarker,
+                      infoWindow: InfoWindow(
+                          title: bin.name,
+                          snippet: "Mboa bin located in ${bin.councilID}"),
+                      position: bin.location),
+                )
+                .toSet(),
           ),
         ],
 
       ),
-      floatingActionButton: Container(
-        margin: const EdgeInsets.only(bottom: 40.0, right: 10),
-        child: FloatingActionButton.extended(
-          onPressed: () async {
-            final GoogleMapController controller = await _controller.future;
-            controller.animateCamera(CameraUpdate.newCameraPosition(
-                const CameraPosition(
-                    bearing: 192.8334901395799,
-                    target: LatLng(3.94266865168059, 11.51917706159022),
-                    tilt: 59.440717697143555,
-                    zoom: 19.151926040649414,)));
-          },
-          label: const Text("Go"),
-          icon:  const Icon(LineIcons.plusCircle),
-        ),
+
+      
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () async {
+          final GoogleMapController controller = await _controller.future;
+          controller.animateCamera(CameraUpdate.newCameraPosition(
+              const CameraPosition(
+                  bearing: 192.8334901395799,
+                  target: LatLng(3.791669144926595, 10.134238671434186),
+                  tilt: 59.440717697143555,
+                  zoom: 19.151926040649414)));
+        },
+        label: const Text("Go"),
+        icon: const Icon(LineIcons.plusCircle),
+
       ),
     );
   }
@@ -169,43 +217,79 @@ class MboaData {
   MboaData(this.day, this.state);
 }
 
+class SheetContainer extends StatelessWidget {
+  const SheetContainer({Key? key}) : super(key: key);
 
-
-
-
-
-
-
-
-
-   // SfCartesianChart(
-                                //     primaryXAxis:
-                                //         CategoryAxis(name: "Waste Amount"),
-                                //     // Chart title
-                                //     title: ChartTitle(
-                                //         text: 'Waste production analysis'),
-
-                                //     // Enable tooltip
-                                //     tooltipBehavior: TooltipBehavior(
-                                //         enable: true,
-                                //         header: '',
-                                //         canShowMarker: false,
-                                //         format: 'point.x : point.y'),
-                                //     series: <BarSeries<MboaData, String>>[
-                                //       BarSeries<MboaData, String>(
-                                //           dataSource: <MboaData>[
-                                //             MboaData('Jan', 35),
-                                //             MboaData('Feb', 28),
-                                //             MboaData('Mar', 34),
-                                //             MboaData('Apr', 32),
-                                //             MboaData('May', 40)
-                                //           ],
-                                //           xValueMapper: (MboaData sales, _) =>
-                                //               sales.day,
-                                //           yValueMapper: (MboaData sales, _) =>
-                                //               sales.state,
-                                          // Enable data label
-                                //           dataLabelSettings:
-                                //               const DataLabelSettings(
-                                //                   isVisible: true)),
-                                //     ]),
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(32.0),
+          topRight: Radius.circular(32.0),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(14.0),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              Text(
+                "MBOABIN-008TH",
+                style: Styles.designWith(
+                    color: Palette.primary, size: 20.0, bold: true),
+              ),
+              const SizedBox(height: 8.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Iconsax.location, color: Palette.primary),
+                      const Text("Yaounde I, Messassi"),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(Iconsax.activity, color: Palette.primary),
+                      const Text("78%"),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Text("More"),
+                      Icon(CupertinoIcons.download_circle,
+                          color: Palette.primary),
+                    ],
+                  ),
+                ],
+              ),
+              SfCircularChart(
+                  title: ChartTitle(text: 'Waste Collection Analysis'),
+                  legend: Legend(isVisible: true),
+                  series: <PieSeries<MboaData, String>>[
+                    PieSeries<MboaData, String>(
+                        explode: true,
+                        explodeIndex: 0,
+                        dataSource: <MboaData>[
+                          MboaData('Bata', 35),
+                          MboaData('Olembe', 28),
+                          MboaData('Emana', 34),
+                          MboaData('Messassi', 32),
+                          MboaData('Etoudi', 40)
+                        ],
+                        xValueMapper: (MboaData data, _) => data.day,
+                        yValueMapper: (MboaData data, _) => data.state,
+                        dataLabelMapper: (MboaData data, _) => data.day,
+                        dataLabelSettings:
+                            const DataLabelSettings(isVisible: true)),
+                  ]),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
