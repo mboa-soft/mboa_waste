@@ -198,7 +198,7 @@ class OptionsTab extends StatelessWidget {
               ),
               SizedBox(width: 5.0),
               Text(title,
-                  style: Styles.header.copyWith(color: Colors.black)),
+                  style: Styles.header.copyWith(color: Colors.black, fontSize: 20)),
             ],
           ),
           const SizedBox(),
