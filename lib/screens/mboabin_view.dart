@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:mboa_waste/config/styles.dart';
+import 'package:mboa_waste/screens/home.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../config/palette.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
+import '../widgets/action_button.dart';
 import 'map_view.dart';
 
 class MboaBinView extends StatefulWidget {
@@ -21,8 +23,11 @@ class MboaBinView extends StatefulWidget {
 }
 
 class _MboaBinViewState extends State<MboaBinView> {
+
+
   @override
   Widget build(BuildContext context) {
+     
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -85,7 +90,7 @@ class _MboaBinViewState extends State<MboaBinView> {
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width,
               child: SingleChildScrollView(
                 child: Padding(
@@ -170,6 +175,9 @@ class _MboaBinViewState extends State<MboaBinView> {
       ),
     );
   }
+
+ 
+  
 }
 
 class Description extends StatelessWidget {
@@ -177,33 +185,61 @@ class Description extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Icon(LineIcons.mapMarker, color: Palette.primary),
-              Text("Essos Hotel du plateau Yaounde", style: Styles.subHeader),
-            ],
-          ),
-          Row(
-            children: [
-              Icon(LineIcons.clock, color: Palette.primary),
-              Text("Friday, 3 March 2022 13:45", style: Styles.subHeader),
-            ],
-          ),
-          const SizedBox(height: 20.0),
-          SleekCircularSlider(
-              appearance: CircularSliderAppearance(
-                customColors: CustomSliderColors(
-                  progressBarColor: Palette.primary,
-                  trackColor: Palette.primary.withOpacity(0.3),
-                  shadowColor: Palette.primary.withOpacity(0.3),
-                ),
+    return Column(
+      children: [
+        Row(
+          children: [
+            Icon(LineIcons.mapMarker, color: Palette.primary),
+            Text("Essos Hotel du plateau Yaounde", style: Styles.subHeader),
+          ],
+        ),
+        Row(
+          children: [
+            Icon(LineIcons.running,color: Palette.primary),
+            Text("40m away", style: Styles.subHeader),
+          ],
+        ),
+        Row(
+          children: [
+            Icon(LineIcons.clock, color: Palette.primary),
+            Text("Friday, 3 March 2022 13:45", style: Styles.subHeader),
+          ],
+        ),
+        const SizedBox(height: 20.0),
+        SleekCircularSlider(
+            appearance: CircularSliderAppearance(
+              customColors: CustomSliderColors(
+                progressBarColor: Palette.primary,
+                trackColor: Palette.primary.withOpacity(0.3),
+                shadowColor: Palette.primary.withOpacity(0.3),
               ),
-              onChange: (double value) {}),
-        ],
-      ),
+            ),
+            onChange: (double value) {}),
+        const SizedBox(height: 20.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Palette.primary,
+                borderRadius: BorderRadius.circular(36.0),
+              ),
+              child: IconButton(
+                splashRadius: 20.0,
+                onPressed: () {
+                  controller.jumpToTab(2);
+                },
+                icon: Icon(Icons.navigation_rounded, color: Colors.white),
+              ),
+            ),
+            SizedBox(width: 10),
+            ActionButton(
+              title: "Empty Dust bin",
+              onTap: () {},
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
@@ -213,12 +249,10 @@ class Comments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text(
-          'Comments',
-          style: Styles.header,
-        ),
+    return Center(
+      child: Text(
+        'Comments',
+        style: Styles.header,
       ),
     );
   }
@@ -295,54 +329,12 @@ class Statistics extends StatelessWidget {
                   ]),
               ActionButton(
                 title: "Download Stats",
-                onTap: () {
-                  print("hello button");
-                },
+                onTap: () {},
                 icon: const Icon(Icons.download, color: Colors.white),
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class ActionButton extends StatelessWidget {
-  final String title;
-  final void Function() onTap;
-  final Icon? icon;
-  ActionButton({
-    Key? key,
-    required this.title,
-    required this.onTap,
-    this.icon,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
-        decoration: BoxDecoration(
-          color: Palette.primary,
-          borderRadius: const BorderRadius.all(Radius.circular(30)),
-        ),
-        child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              icon ?? const SizedBox.shrink(),
-              const SizedBox(
-                width: 10,
-              ),
-              Text(
-                title,
-                style:
-                    Styles.header.copyWith(color: Colors.white, fontSize: 20),
-              )
-            ]),
       ),
     );
   }

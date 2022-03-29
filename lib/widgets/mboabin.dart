@@ -28,8 +28,8 @@ class Mboabin extends StatelessWidget {
             ),
             image: const DecorationImage(
               opacity: 0.5,
-              image: NetworkImage(
-                  'https://www.afrik21.africa/wp-content/uploads/2019/12/shutterstock_1094501483.jpg'),
+              image: AssetImage(
+                  'assets/images/bins.jpeg'),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(12.0),
