@@ -69,21 +69,21 @@ class MapViewState extends State<MapView> {
               target: LatLng(3.791669144926595, 10.134238671434186),
               zoom: 19.151926040649414,
             ),
-            onLongPress: (LatLng latLng) {
-              _circles.add(Circle(
-                consumeTapEvents: true,
-                circleId: const CircleId('blue'),
-                center: latLng,
-                radius: 200.0,
-                fillColor: Colors.blue.shade500.withOpacity(.5),
-                strokeColor: Colors.green.shade700.withOpacity(.7),
-                strokeWidth: 5,
-              ));
+            // onLongPress: (LatLng latLng) {
+            //   _circles.add(Circle(
+            //     consumeTapEvents: true,
+            //     circleId: const CircleId('blue'),
+            //     center: latLng,
+            //     radius: 200.0,
+            //     fillColor: Colors.blue.shade500.withOpacity(.5),
+            //     strokeColor: Colors.green.shade700.withOpacity(.7),
+            //     strokeWidth: 5,
+            //   ));
 
-              setState(() {
-                _mapController?.animateCamera(CameraUpdate.newLatLng(latLng));
-              });
-            },
+            //   setState(() {
+            //     _mapController?.animateCamera(CameraUpdate.newLatLng(latLng));
+            //   });
+            // },
             onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
             },
