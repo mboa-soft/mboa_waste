@@ -95,7 +95,7 @@ class _MboaBinViewState extends State<MboaBinView> {
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Column(
+                  child: Column(fl
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
