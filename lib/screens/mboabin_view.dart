@@ -229,10 +229,10 @@ class Description extends StatelessWidget {
                 onPressed: () {
                   controller.jumpToTab(2);
                 },
-                icon: Icon(Icons.navigation_rounded, color: Colors.white),
+                icon: const Icon(Icons.navigation_rounded, color: Colors.white),
               ),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             ActionButton(
               title: "Empty Dust bin",
               onTap: () {},

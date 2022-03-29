@@ -9,7 +9,6 @@ import 'package:line_icons/line_icons.dart';
 import 'package:mboa_waste/config/data.dart';
 import 'package:mboa_waste/config/palette.dart';
 import 'package:mboa_waste/config/styles.dart';
-import 'package:mboa_waste/screens/screens.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class MapView extends StatefulWidget {
@@ -46,7 +45,83 @@ class MapViewState extends State<MapView> {
       AndroidGoogleMapsFlutter.useAndroidViewSurface = true;
     }
     return Scaffold(
-
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: Colors.transparent,
+        actions: [
+          Container(
+              width: 35,
+              height: 50,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10), color: Colors.white),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  MaterialButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) => Container(
+                            padding: const EdgeInsets.all(20),
+                            color: Colors.white,
+                            height: MediaQuery.of(context).size.height * 0.3,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Select Theme",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                SizedBox(
+                                  width: double.infinity,
+                                  height: 100,
+                                  child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: mapThemes.length,
+                                      itemBuilder: (context, index) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            _mapController?.setMapStyle(
+                                                mapThemes[index]['style']);
+                                            Navigator.pop(context);
+                                          },
+                                          child: Container(
+                                            width: 100,
+                                            margin: const EdgeInsets.only(
+                                                right: 10),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: NetworkImage(
+                                                      mapThemes[index]
+                                                          ['image']),
+                                                )),
+                                          ),
+                                        );
+                                      }),
+                                ),
+                              ],
+                            )),
+                      );
+                    },
+                    padding: const EdgeInsets.all(0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Icon(Icons.layers_rounded, size: 25),
+                  ),
+                ],
+              ))
+        ],
+      ),
       body: Stack(
         children: [
           // Positioned(
@@ -62,6 +137,7 @@ class MapViewState extends State<MapView> {
           //             icon: Icon(Iconsax.map, size: 32, color: Palette.primary))
           //       ],
           //     )),
+
           GoogleMap(
             myLocationEnabled: true,
             myLocationButtonEnabled: true,
@@ -93,58 +169,61 @@ class MapViewState extends State<MapView> {
               const TileOverlay(tileOverlayId: TileOverlayId('overlay'))
             },
 
-            markers: {
-              const Marker(
-                  markerId: MarkerId('mboabin8113'),
-                  icon: BitmapDescriptor.defaultMarker,
-                  infoWindow: InfoWindow(
-                      title: "Mboabin Messassi",
-                      snippet: "Mboa bin located in Messassi, near Zoatupsi"),
-                  position: LatLng(3.942232873265923, 11.518191532038795)),
-              const Marker(
-                  markerId: MarkerId('mboabin8112'),
-                  icon: BitmapDescriptor.defaultMarker,
-                  infoWindow: InfoWindow(
-                      title: "Mboabin Messassi",
-                      snippet: "Mboa bin located in Messassi, near Zoatupsi"),
-                  position: LatLng(3.9420312137911986, 11.51875692350712)),
-              const Marker(
-                  markerId: MarkerId('mboabin8119'),
-                  icon: BitmapDescriptor.defaultMarker,
-                  infoWindow: InfoWindow(
-                      title: "Mboabin Messassi",
-                      snippet: "Mboa bin located in Messassi, near Zoatupsi"),
-                  position: LatLng(3.9415341151368493, 11.517668732629094)),
-              const Marker(
-                  markerId: MarkerId('mboabin8111'),
-                  icon: BitmapDescriptor.defaultMarker,
-                  infoWindow: InfoWindow(
-                      title: "Mboabin Messassi",
-                      snippet: "Mboa bin located in Messassi, near Zoatupsi"),
-                  position: LatLng(3.94266865168059, 11.51917706159022)),
-              const Marker(
-                  markerId: MarkerId('mboabin8110'),
-                  icon: BitmapDescriptor.defaultMarker,
-                  infoWindow: InfoWindow(
-                      title: "Mboabin Messassi",
-                      snippet: "Mboa bin located in Messassi, near Zoatupsi"),
-                  position: LatLng(3.9420312137911986, 11.51875692350712)),
-              Marker(
-                  markerId: const MarkerId('mboabin8101'),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MboaBinView(),
-                      ),
-                    );
-                  
-                  },
-                  icon: BitmapDescriptor.defaultMarker,
-                  infoWindow: const InfoWindow(
-                      title: "Mboabin Messassi",
-                      snippet: "Mboa bin located in Messassi, near Zoatupsi"),
-                  position: const LatLng(3.94170710169969, 11.518659002751367)),
+            // markers: {
+            //   const Marker(
+            //       markerId: MarkerId('mboabin8113'),
+            //       icon: BitmapDescriptor.defaultMarker,
+            //       infoWindow: InfoWindow(
+            //           title: "Mboabin Messassi",
+            //           snippet: "Mboa bin located in Messassi, near Zoatupsi"),
+            //       position: LatLng(3.942232873265923, 11.518191532038795)),
+            //   const Marker(
+            //       markerId: MarkerId('mboabin8112'),
+            //       icon: BitmapDescriptor.defaultMarker,
+            //       infoWindow: InfoWindow(
+            //           title: "Mboabin Messassi",
+            //           snippet: "Mboa bin located in Messassi, near Zoatupsi"),
+            //       position: LatLng(3.9420312137911986, 11.51875692350712)),
+            //   const Marker(
+            //       markerId: MarkerId('mboabin8119'),
+            //       icon: BitmapDescriptor.defaultMarker,
+            //       infoWindow: InfoWindow(
+            //           title: "Mboabin Messassi",
+            //           snippet: "Mboa bin located in Messassi, near Zoatupsi"),
+            //       position: LatLng(3.9415341151368493, 11.517668732629094)),
+            //   const Marker(
+            //       markerId: MarkerId('mboabin8111'),
+            //       icon: BitmapDescriptor.defaultMarker,
+            //       infoWindow: InfoWindow(
+            //           title: "Mboabin Messassi",
+            //           snippet: "Mboa bin located in Messassi, near Zoatupsi"),
+            //       position: LatLng(3.94266865168059, 11.51917706159022)),
+            //   const Marker(
+            //       markerId: MarkerId('mboabin8110'),
+            //       icon: BitmapDescriptor.defaultMarker,
+            //       infoWindow: InfoWindow(
+            //           title: "Mboabin Messassi",
+            //           snippet: "Mboa bin located in Messassi, near Zoatupsi"),
+            //       position: LatLng(3.9420312137911986, 11.51875692350712)),
+            //   Marker(
+            //       markerId: const MarkerId('mboabin8101'),
+            //       onTap: () {
+            //         // Navigator.push(
+            //         //   context,
+            //         //   MaterialPageRoute(
+            //         //     builder: (context) => MboaBinView(),
+            //         //   ),
+            //         // );
+            //         showModalBottomSheet(
+            //             context: context,
+            //             builder: (context) => const SheetContainer());
+            //       },
+            //       icon: BitmapDescriptor.defaultMarker,
+            //       infoWindow: const InfoWindow(
+            //           title: "Mboabin Messassi",
+            //           snippet: "Mboa bin located in Messassi, near Zoatupsi"),
+            //       position: const LatLng(3.94170710169969, 11.518659002751367))
+            // },
 
             polygons: {
               Polygon(
@@ -177,7 +256,92 @@ class MapViewState extends State<MapView> {
                       onTap: () => showBottomSheet(
                           context: context,
                           backgroundColor: Colors.transparent,
-                          builder: (context) => const SheetContainer()),
+                          builder: (context) => Container(
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(32.0),
+                                    topRight: Radius.circular(32.0),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(14.0),
+                                  child: SingleChildScrollView(
+                                    physics: const BouncingScrollPhysics(),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          "MBOABIN-008TH",
+                                          style: Styles.designWith(
+                                              color: Palette.primary,
+                                              size: 20.0,
+                                              bold: true),
+                                        ),
+                                        const SizedBox(height: 8.0),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Icon(Iconsax.location,
+                                                    color: Palette.primary),
+                                                const Text("Voyageur"),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Icon(Iconsax.activity,
+                                                    color: Palette.primary),
+                                                const Text("78%"),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                const Text("More"),
+                                                Icon(
+                                                    CupertinoIcons
+                                                        .download_circle,
+                                                    color: Palette.primary),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        SfCircularChart(
+                                            title: ChartTitle(
+                                                text:
+                                                    'Waste Collection Analysis'),
+                                            legend: Legend(isVisible: true),
+                                            series: <
+                                                PieSeries<MboaData, String>>[
+                                              PieSeries<MboaData, String>(
+                                                  explode: true,
+                                                  explodeIndex: 0,
+                                                  dataSource: <MboaData>[
+                                                    MboaData('Bata', 35),
+                                                    MboaData('Olembe', 28),
+                                                    MboaData('Emana', 34),
+                                                    MboaData('Messassi', 32),
+                                                    MboaData('Etoudi', 40)
+                                                  ],
+                                                  xValueMapper:
+                                                      (MboaData data, _) =>
+                                                          data.day,
+                                                  yValueMapper:
+                                                      (MboaData data, _) =>
+                                                          data.state,
+                                                  dataLabelMapper:
+                                                      (MboaData data, _) =>
+                                                          data.day,
+                                                  dataLabelSettings:
+                                                      const DataLabelSettings(
+                                                          isVisible: true)),
+                                            ]),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              )),
                       icon: BitmapDescriptor.defaultMarker,
                       infoWindow: InfoWindow(
                           title: bin.name,
@@ -187,10 +351,7 @@ class MapViewState extends State<MapView> {
                 .toSet(),
           ),
         ],
-
       ),
-
-      
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
@@ -202,9 +363,9 @@ class MapViewState extends State<MapView> {
                   tilt: 59.440717697143555,
                   zoom: 19.151926040649414)));
         },
-        label: const Text("Go"),
+        backgroundColor: Palette.primary,
+        label: const Text("Initial"),
         icon: const Icon(LineIcons.plusCircle),
-
       ),
     );
   }
@@ -248,7 +409,7 @@ class SheetContainer extends StatelessWidget {
                   Row(
                     children: [
                       Icon(Iconsax.location, color: Palette.primary),
-                      const Text("Yaounde I, Messassi"),
+                      const Text("Voyageur"),
                     ],
                   ),
                   Row(
