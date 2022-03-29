@@ -8,7 +8,6 @@ import 'package:mboa_waste/widgets/widgets.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -96,22 +95,38 @@ class Main extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const SizedBox(height: 20.0),
-              SfCartesianChart(
-                  // Initialize category axis
-                  primaryXAxis: CategoryAxis(),
-                  series: <LineSeries<SalesData, String>>[
-                    LineSeries<SalesData, String>(
-                        // Bind data source
-                        dataSource: <SalesData>[
-                          SalesData('Jan', 35),
-                          SalesData('Feb', 28),
-                          SalesData('Mar', 34),
-                          SalesData('Apr', 32),
-                          SalesData('May', 40)
+              const SizedBox(height: 10.0),
+              SfCircularChart(
+                  legend: Legend(isVisible: true),
+                  series: <PieSeries<MboaData, String>>[
+                    PieSeries<MboaData, String>(
+                        explode: true,
+                        explodeIndex: 2,
+                        dataSource: <MboaData>[
+                          MboaData('Evechee', 97),
+                          MboaData('Voyageur', 67),
+                          MboaData('Centre ville', 20),
+                          MboaData('Ntoumba', 68)
                         ],
-                        xValueMapper: (SalesData sales, _) => sales.year,
-                        yValueMapper: (SalesData sales, _) => sales.sales)
+                        xValueMapper: (MboaData data, _) => data.day,
+                        yValueMapper: (MboaData data, _) => data.state,
+                        dataLabelMapper: (MboaData data, _) => data.day,
+                        dataLabelSettings:
+                            const DataLabelSettings(isVisible: true)),
+                  ]),
+              SfCartesianChart(
+                  primaryXAxis: CategoryAxis(),
+                  series: <CartesianSeries>[
+                    // Render column series
+                    ColumnSeries<ChartData, String>(
+                        dataSource: chartData,
+                        xValueMapper: (ChartData data, _) => data.x,
+                        yValueMapper: (ChartData data, _) => data.y),
+                    // Render line series
+                    LineSeries<ChartData, String>(
+                        dataSource: chartData,
+                        xValueMapper: (ChartData data, _) => data.x,
+                        yValueMapper: (ChartData data, _) => data.y)
                   ]),
               const SizedBox(height: 20.0),
               Text(
@@ -139,7 +154,30 @@ class Main extends StatelessWidget {
               ),
               const SizedBox(height: 20.0),
               Text(
-                'Communities',
+                'Edea I',
+                style: Styles.designWith(
+                    color: Colors.black, size: 22.0, bold: true),
+              ),
+              const SizedBox(height: 5.0),
+              SizedBox(
+                height: 170.0,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Mboabin(),
+                    );
+                  },
+                  itemCount: 10,
+                  shrinkWrap: true,
+                  addAutomaticKeepAlives: true,
+                  physics: const BouncingScrollPhysics(),
+                ),
+              ),
+              const SizedBox(height: 20.0),
+              Text(
+                'Ntoumba',
                 style: Styles.designWith(
                     color: Colors.black, size: 18.0, bold: true),
               ),
@@ -211,3 +249,16 @@ class SalesData {
   final String year;
   final double sales;
 }
+
+class ChartData {
+  ChartData(this.x, this.y);
+  final String x;
+  final double? y;
+}
+
+final List<ChartData> chartData = <ChartData>[
+  ChartData('Evechee', 120),
+  ChartData('Voyageur', 67),
+  ChartData('Centre ville', 22),
+  ChartData('Ntoumba', 16),
+];

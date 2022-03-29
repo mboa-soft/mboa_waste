@@ -8,22 +8,19 @@ class CityBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
       height: 60.0,
       width: 160.0,
-      
       child: Center(
         child: Text(
-          "Yaounde",
-          style: Styles.designWith(color: Palette.primary, size: 20, bold: true),
+          "Edea",
+          style:
+              Styles.designWith(color: Palette.primary, size: 20, bold: true),
         ),
       ),
       decoration: BoxDecoration(
-        image:  const DecorationImage(
+        image: const DecorationImage(
           image: AssetImage("assets/images/city_bg.jpg"),
           opacity: 0.5,
-          
-          
           fit: BoxFit.cover,
         ),
         color: Colors.black.withOpacity(0.7),
