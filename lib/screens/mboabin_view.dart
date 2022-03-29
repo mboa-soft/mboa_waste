@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:mboa_waste/config/styles.dart';
+import 'package:mboa_waste/screens/home.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../config/palette.dart';
@@ -22,8 +23,11 @@ class MboaBinView extends StatefulWidget {
 }
 
 class _MboaBinViewState extends State<MboaBinView> {
+
+
   @override
   Widget build(BuildContext context) {
+     
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -32,9 +36,7 @@ class _MboaBinViewState extends State<MboaBinView> {
               height: MediaQuery.of(context).size.height * 0.4,
               width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
-
-                image:   DecorationImage(
-
+                image: DecorationImage(
                   image: AssetImage('assets/images/city_bg.jpg'),
                   fit: BoxFit.cover,
                 ),
@@ -173,6 +175,9 @@ class _MboaBinViewState extends State<MboaBinView> {
       ),
     );
   }
+
+ 
+  
 }
 
 class Description extends StatelessWidget {
@@ -190,6 +195,12 @@ class Description extends StatelessWidget {
         ),
         Row(
           children: [
+            Icon(LineIcons.running,color: Palette.primary),
+            Text("40m away", style: Styles.subHeader),
+          ],
+        ),
+        Row(
+          children: [
             Icon(LineIcons.clock, color: Palette.primary),
             Text("Friday, 3 March 2022 13:45", style: Styles.subHeader),
           ],
@@ -203,9 +214,31 @@ class Description extends StatelessWidget {
                 shadowColor: Palette.primary.withOpacity(0.3),
               ),
             ),
-            onChange: (double value) {
-            
-            }),
+            onChange: (double value) {}),
+        const SizedBox(height: 20.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Palette.primary,
+                borderRadius: BorderRadius.circular(36.0),
+              ),
+              child: IconButton(
+                splashRadius: 20.0,
+                onPressed: () {
+                  controller.jumpToTab(2);
+                },
+                icon: Icon(Icons.navigation_rounded, color: Colors.white),
+              ),
+            ),
+            SizedBox(width: 10),
+            ActionButton(
+              title: "Empty Dust bin",
+              onTap: () {},
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -296,9 +329,7 @@ class Statistics extends StatelessWidget {
                   ]),
               ActionButton(
                 title: "Download Stats",
-                onTap: () {
-                 
-                },
+                onTap: () {},
                 icon: const Icon(Icons.download, color: Colors.white),
               ),
             ],

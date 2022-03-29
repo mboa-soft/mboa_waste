@@ -8,6 +8,7 @@ import 'package:mboa_waste/widgets/widgets.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -15,7 +16,8 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-  final controller = PersistentTabController(initialIndex: 0);
+final controller = PersistentTabController(initialIndex: 0);
+
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class _HomeState extends State<Home> {
         controller: controller,
         screens: _buildScreens(),
         items: _navBarsItems(),
+        hideNavigationBar: false,
         confineInSafeArea: true,
         // hideNavigationBar: controller.index != 0 ? true : false,
         margin: const EdgeInsets.all(12.0),
@@ -60,7 +63,6 @@ class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    
       appBar: AppBar(
           backgroundColor: Colors.white54,
           title: Text(
@@ -70,7 +72,7 @@ class Main extends StatelessWidget {
           ),
           centerTitle: true,
           elevation: 0.0,
-          leading:  Padding(
+          leading: Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: GestureDetector(
               onTap: () {
@@ -93,31 +95,32 @@ class Main extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-          
             children: <Widget>[
               const SizedBox(height: 20.0),
-               SfCartesianChart(
-            // Initialize category axis
-            primaryXAxis: CategoryAxis(),
-
-            series: <LineSeries<SalesData, String>>[
-              LineSeries<SalesData, String>(
-                // Bind data source
-                dataSource:  <SalesData>[
-                  SalesData('Jan', 35),
-                  SalesData('Feb', 28),
-                  SalesData('Mar', 34),
-                  SalesData('Apr', 32),
-                  SalesData('May', 40)
-                ],
-                xValueMapper: (SalesData sales, _) => sales.year,
-                yValueMapper: (SalesData sales, _) => sales.sales
-              )
-            ]
-          ),
-             const  SizedBox(height: 20.0),
-              Text("Cities", style: Styles.header,),
-            const  SizedBox(height: 5,),
+              SfCartesianChart(
+                  // Initialize category axis
+                  primaryXAxis: CategoryAxis(),
+                  series: <LineSeries<SalesData, String>>[
+                    LineSeries<SalesData, String>(
+                        // Bind data source
+                        dataSource: <SalesData>[
+                          SalesData('Jan', 35),
+                          SalesData('Feb', 28),
+                          SalesData('Mar', 34),
+                          SalesData('Apr', 32),
+                          SalesData('May', 40)
+                        ],
+                        xValueMapper: (SalesData sales, _) => sales.year,
+                        yValueMapper: (SalesData sales, _) => sales.sales)
+                  ]),
+              const SizedBox(height: 20.0),
+              Text(
+                "Cities",
+                style: Styles.header,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
               SizedBox(
                 height: 70.0,
                 child: ListView.builder(
@@ -202,6 +205,7 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
     ),
   ];
 }
+
 class SalesData {
   SalesData(this.year, this.sales);
   final String year;
